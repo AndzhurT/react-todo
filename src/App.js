@@ -4,7 +4,7 @@ import AddTodoForm from './AddTodoForm';
 import {useState} from 'react';
 //to do list
 
-function main() {
+function Main() {
   const [newTodo, setNewTodo] = useState('');
 
   const handleAddTodo = (todo) => {setNewTodo(todo)};
@@ -20,5 +20,5 @@ function main() {
   );
 }
 
-export default main;
+export default Main;
 
