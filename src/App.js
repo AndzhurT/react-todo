@@ -4,7 +4,7 @@ import AddTodoForm from './AddTodoForm';
 //to do list
 
 function useSemiPersistentState(key) {
-  // Save the var
+  // Save local storage items in savedTodoList variable
   const savedTodoList = JSON.parse(localStorage.getItem(key));
 
   // Create new state variable named "todoList" with setter "setTodoList" 
