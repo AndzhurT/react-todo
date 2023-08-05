@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import TodoList from './TodoList';
+import InputWithLabel from './InputWithLabel';
 
 function AddTodoForm ({onAddTodo}) {
   // creates a new state variable "todoTitle" with setter "setTodoTitle"
@@ -25,11 +25,9 @@ function AddTodoForm ({onAddTodo}) {
 
   return (
     <div>
-      <form onSubmit={handleAddTodo}> 
-        <label htmlFor="todoTitle" > Title </label>
-        {/* assiging the value todoTitle to the input and setting the onChange to call the function handleTitleChange*/}
-        <input  type="text" id="todoTitle" name="title" value={todoTitle} onChange={handleTitleChange}></input>
-        <button type="submit"> Add </button>
+      <form onSubmit={handleAddTodo}>
+        <InputWithLabel value={todoTitle} onChange={handleTitleChange}> Title </InputWithLabel>
+        <button type="submit">Add</button>
       </form>
     </div>
   );

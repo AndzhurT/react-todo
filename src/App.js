@@ -27,10 +27,16 @@ function Main() {
 
   const [todoList, setTodoList] = useSemiPersistentState("savedTodoList");
 
+  // addTodo item
   function addTodo(newTodo) {
     setTodoList([...todoList, newTodo])
   };
-  
+
+  // removeTodo item
+  function removeTodo(id) {
+    const updatedTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(updatedTodoList)
+  }
 
   return (
     // empty tags - a short syntax for declaring fragments
@@ -39,7 +45,7 @@ function Main() {
       {/* callback handler */}
       <AddTodoForm onAddTodo={addTodo}/>
       {/* adds list items */}
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} removeTodo={removeTodo} />
       <p></p>
     </>
   );
