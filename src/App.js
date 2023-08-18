@@ -14,7 +14,7 @@ function useSemiPersistentState(key) {
   // useEffect
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(todoList))
-  }), [key, todoList];
+  }, [key, todoList]);
   
   return (
     [todoList, setTodoList]
@@ -46,7 +46,6 @@ function Main() {
       <AddTodoForm onAddTodo={addTodo}/>
       {/* adds list items */}
       <TodoList todoList={todoList} removeTodo={removeTodo} />
-      <p></p>
     </>
   );
 }
