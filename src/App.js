@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+
 //to do list
 
-function useSemiPersistentState(key) {
+function Main() {
+  // Local storage key
+  const key = "savedTodoList";
+
   // Save local storage items in savedTodoList variable
   const savedTodoList = JSON.parse(localStorage.getItem(key));
 
@@ -11,25 +15,47 @@ function useSemiPersistentState(key) {
   // and default value pf a savedTodoList or an empty Array []
   const [todoList, setTodoList] = useState(savedTodoList || []);
 
-  // useEffect
+  // An indicator to know if the data is still loading 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(todoList))
-  }, [key, todoList]);
-  
-  return (
-    [todoList, setTodoList]
-  )
-}
+    const promise = new Promise((resolve, reject) => {
 
-function Main() {
-  // Create new state variable named "todoList" with setter "setTodoList" 
-  // and default value as the savedTodoList from localStorage
+      setTimeout(() => {
+        resolve({ data: { todoList: savedTodoList || [] } });
+      }, 2000); 
+    })
 
-  const [todoList, setTodoList] = useSemiPersistentState("savedTodoList");
+    promise
+      .then((result) => result.data.todoList)
+      .then((loadingTodoList) => {
+        setTodoList(loadingTodoList);
+        setIsLoading(false); // turns off loading once the data is fetched. 
+      })
+      .catch((error) => {
+        console.error('An error occurred...', error);
+      }) 
+  }, []);
 
-  // addTodo item
+
+  // useEffect to do list decleration to save local storage if the data is not loading
+  useEffect(() => {
+    if (isLoading === false) {
+      localStorage.setItem(key, JSON.stringify(todoList))
+    } 
+}, [key, todoList, isLoading]);
+
+
+  // addTodo item 
   function addTodo(newTodo) {
-    setTodoList([...todoList, newTodo])
+    // An if condition to check if the item is empty or not. If it's not empty, then it will
+    // add the item to the todoList.
+    if (newTodo.title.trim() != "") {
+      setTodoList([...todoList, newTodo])
+    }
+    else {
+      console.log("An error occured, toDo item can not be empty...")
+    }
   };
 
   // removeTodo item
@@ -44,8 +70,13 @@ function Main() {
       <h1> Todo List </h1>
       {/* callback handler */}
       <AddTodoForm onAddTodo={addTodo}/>
-      {/* adds list items */}
-      <TodoList todoList={todoList} removeTodo={removeTodo} />
+      {isLoading ? (
+        // creates a loading text
+        <p>Loading...</p>
+      ) : (
+        // adds list items 
+        <TodoList todoList={todoList} removeTodo={removeTodo} />
+      )}
     </>
   );
 }
