@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 
+
 //to do list
 
 function Main() {
@@ -18,33 +19,47 @@ function Main() {
   // An indicator to know if the data is still loading 
   const [isLoading, setIsLoading] = useState(true);
 
+  async function fetchData() {
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      } 
+      const data = await response.json();
+      const todos = data.records.map(record => ({
+        title: record.fields.title,
+        id: record.id,
+        createdTime: record.createdTime,
+      }));
+      console.log(todos)
+      setTodoList(todos);
+    } catch (error) {
+      console.log("Oops, an error occurred...", error.message);
+    } finally {
+      setIsLoading(false);
+    }
+
+  } 
+
   useEffect(() => {
-    const promise = new Promise((resolve, reject) => {
-
-      setTimeout(() => {
-        resolve({ data: { todoList: savedTodoList || [] } });
-      }, 2000); 
-    })
-
-    promise
-      .then((result) => result.data.todoList)
-      .then((loadingTodoList) => {
-        setTodoList(loadingTodoList);
-        setIsLoading(false); // turns off loading once the data is fetched. 
-      })
-      .catch((error) => {
-        console.error('An error occurred...', error);
-      }) 
+    fetchData();
   }, []);
 
 
   // useEffect to do list decleration to save local storage if the data is not loading
   useEffect(() => {
-    if (isLoading === false) {
-      localStorage.setItem(key, JSON.stringify(todoList))
-    } 
-}, [key, todoList, isLoading]);
-
+    if (!isLoading) {
+      localStorage.setItem(key, JSON.stringify(todoList));
+    }
+  }, [key, todoList, isLoading]);
 
   // addTodo item 
   function addTodo(newTodo) {
