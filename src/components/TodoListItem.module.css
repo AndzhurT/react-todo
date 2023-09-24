@@ -53,7 +53,7 @@ body {
   &:hover {
     background-color: #de328c; 
     border-color: #de328c;
-
+    color: #fff;
   }
 
   &:focus {
@@ -95,10 +95,47 @@ body {
   &:hover {
     background-color: #32de84; 
     border-color:#32de84;
+    color: #fff;
   }
 
   &:focus {
     border-color: #23995c; 
+    box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+    outline: 0;  
+  }
+}
+
+.button3 {
+  background-color: #fff;
+  border: 2px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 2px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+  margin: 10px;
+
+  &:hover {
+    background-color: #0020d4; 
+    border-color:#0121d8;
+    color: #fff;
+  }
+
+  &:focus {
+    border-color: #011fca; 
     box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
     outline: 0;  
   }
