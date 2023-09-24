@@ -80,25 +80,55 @@ function Main() {
     setTodoList(updatedTodoList)
   }
 
+
+  // Sorting // 
+  const [isAscending, setIsAscending] = useState(true);
+
+  const toggleSortOrder = () => {
+    setIsAscending(!isAscending);
+  };
+  
+
+  // Sort the todoList based on the title field
+  const sortedTodoList = [...todoList].sort((a, b) => {
+    // If either a or b doesn't have a title, consider them equal
+    if (!a.title || !b.title) {
+      return 0; 
+    }
+    
+    if (isAscending) {
+      return a.title.localeCompare(b.title);
+    } else {
+      return b.title.localeCompare(a.title);
+    }
+  });
+
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={
-          <>
-            <h1 className={style.h1}>Todo List</h1>
-            {/* callback handler */}
-            <AddTodoForm onAddTodo={addTodo} />
-            {isLoading ? (
-              // creates a loading text
-              <p className={style.p}>Loading...</p>
-            ) : (
-              // adds list items 
-              <TodoList todoList={todoList} removeTodo={removeTodo} />
-            )}
-          </>
-        } />
-          
-        <Route path="new" element={<h1 className={style.h1}>New Todo List</h1>}/>
+        <Route
+          path="/"
+          element={
+            <>
+              <h1 className={style.h1}>Todo List</h1>
+              {/* callback handler */}
+              <AddTodoForm onAddTodo={addTodo} />
+              {isLoading ? (
+                // creates a loading text
+                <p className={style.p}>Loading...</p>
+              ) : (
+                // adds list items
+                <TodoList todoList={sortedTodoList} removeTodo={removeTodo} />
+              )}
+              {/* button for sorting */}
+              <button className={style.button3} onClick={toggleSortOrder}>
+                {isAscending ? 'Sort-Descending' : 'Sort-Ascending'}
+              </button>
+            </>
+          }
+        />
+        <Route path="new" element={<h1 className={style.h1}>New Todo List</h1>} />
       </Routes>
     </BrowserRouter>
   );
