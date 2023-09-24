@@ -1,0 +1,132 @@
+/* global element */
+body {
+  background-color: black;
+}
+
+.p {
+  size: 20px;
+  color: #D7D7D7;
+  padding: 10px;
+}
+.ListItem {
+  color: #D7D7D7;
+  list-style-type: '👉';
+  padding-inline-start: 1ch;
+}
+
+.h1 {
+  margin: 10px;
+  color:#e9e8e8;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.InputLabel {
+  margin: 10px 0px 10px 10px;
+  width: 250px;
+  height: 25px;
+  border-radius: 8px;
+}
+
+.button {
+  background-color: #fff;
+  border: 2px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+  margin: 2px;
+
+  &:hover {
+    background-color: #de328c; 
+    border-color: #de328c;
+
+  }
+
+  &:focus {
+    border-color: #881f55; 
+    box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+    outline: 0;
+  }
+}
+
+.li {
+  list-style-type: '👉';
+  padding-inline-start: 10ch;
+
+}
+
+.button2 {
+  background-color: #fff;
+  border: 2px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 2px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+  margin: 10px;
+
+  &:hover {
+    background-color: #32de84; 
+    border-color:#32de84;
+  }
+
+  &:focus {
+    border-color: #23995c; 
+    box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+    outline: 0;  
+  }
+}
+
+.li {
+  list-style-type: '👉';
+  padding-inline-start: 10ch;
+}
+
+
+/* Mobile phones */
+@media (max-width: 599px) {
+  body {
+    text-align: center;
+  }
+}
+
+/* Tablets */
+@media (min-width: 600px) and (max-width: 1023px) {
+  body {
+    text-align: center;
+  }
+}
+
+/* Desktops */
+@media (min-width: 1024px) {
+  body {
+    text-align: left;
+  }
+}

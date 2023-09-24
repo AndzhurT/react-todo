@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import style from "./TodoListItem.module.css";
 
 //to do list
 
@@ -84,21 +84,21 @@ function Main() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-          // empty tags - a short syntax for declaring fragments
           <>
-            <h1>Todo List</h1>
+            <h1 className={style.h1}>Todo List</h1>
             {/* callback handler */}
             <AddTodoForm onAddTodo={addTodo} />
             {isLoading ? (
               // creates a loading text
-              <p>Loading...</p>
+              <p className={style.p}>Loading...</p>
             ) : (
               // adds list items 
               <TodoList todoList={todoList} removeTodo={removeTodo} />
             )}
           </>
         } />
-        <Route path="new" element={<h1>New Todo List</h1>}/>
+          
+        <Route path="new" element={<h1 className={style.h1}>New Todo List</h1>}/>
       </Routes>
     </BrowserRouter>
   );
