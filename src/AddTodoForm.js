@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import InputWithLabel from './InputWithLabel';
+import style from "./TodoListItem.module.css";
 
 function AddTodoForm ({onAddTodo}) {
   // creates a new state variable "todoTitle" with setter "setTodoTitle"
@@ -24,12 +25,11 @@ function AddTodoForm ({onAddTodo}) {
   }; 
 
   return (
-    <div>
       <form onSubmit={handleAddTodo}>
         <InputWithLabel value={todoTitle} onChange={handleTitleChange}> Title </InputWithLabel>
-        <button type="submit">Add</button>
+        <button className={style.button2} type="submit">Create</button>
       </form>
-    </div>
+
   );
 }
 
