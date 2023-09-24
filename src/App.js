@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 //to do list
@@ -80,19 +81,26 @@ function Main() {
   }
 
   return (
-    // empty tags - a short syntax for declaring fragments
-    <>
-      <h1> Todo List </h1>
-      {/* callback handler */}
-      <AddTodoForm onAddTodo={addTodo}/>
-      {isLoading ? (
-        // creates a loading text
-        <p>Loading...</p>
-      ) : (
-        // adds list items 
-        <TodoList todoList={todoList} removeTodo={removeTodo} />
-      )}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          // empty tags - a short syntax for declaring fragments
+          <>
+            <h1>Todo List</h1>
+            {/* callback handler */}
+            <AddTodoForm onAddTodo={addTodo} />
+            {isLoading ? (
+              // creates a loading text
+              <p>Loading...</p>
+            ) : (
+              // adds list items 
+              <TodoList todoList={todoList} removeTodo={removeTodo} />
+            )}
+          </>
+        } />
+        <Route path="new" element={<h1>New Todo List</h1>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
