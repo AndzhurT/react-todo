@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import style from "./TodoListItem.module.css";
+import style from './TodoListItem.module.css';
+import PropTypes from 'prop-types';
 
 function InputWithLabel({ label, value, onChange }) {
   const inputRef = useRef();
@@ -19,7 +20,11 @@ function InputWithLabel({ label, value, onChange }) {
   )
 };
 
-
+InputWithLabel.propTypes = {
+  label: PropTypes.string.isRequired, 
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default InputWithLabel
 

@@ -1,5 +1,6 @@
-import React from "react";
-import style from "./TodoListItem.module.css";
+import React from 'react';
+import style from './TodoListItem.module.css';
+import PropTypes from 'prop-types';
 
 function TodoListItem({ id, title, removeTodo }) {
   const handleRemoveClick = () => {
@@ -12,5 +13,12 @@ function TodoListItem({ id, title, removeTodo }) {
     </li>
   );
 }
+
+TodoListItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  removeTodo: PropTypes.func.isRequired,
+};
+
 
 export default TodoListItem;
